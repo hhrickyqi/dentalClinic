@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"com.ricky.dentalClinic.mapper","com.ricky.dentalClinic.dao"})
+@MapperScan({"com.ricky.dentalClinic.mbg.mapper","com.ricky.dentalClinic.dao"})
 public class MybatisConfig {
 }
