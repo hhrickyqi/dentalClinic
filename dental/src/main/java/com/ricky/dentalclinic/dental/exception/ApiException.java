@@ -1,6 +1,6 @@
-package com.ricky.dentalClinic.exception;
+package com.ricky.dentalclinic.dental.exception;
 
-import com.ricky.dentalClinic.api.IErrorCode;
+import com.ricky.dentalclinic.dental.api.IErrorCode;
 
 /**
  * 自定义API异常

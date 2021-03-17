@@ -1,7 +1,7 @@
-package com.ricky.dentalClinic.service;
+package com.ricky.dentalclinic.dental.service;
 
 
-import com.ricky.dentalClinic.mbg.model.TUser;
+import com.ricky.dentalclinic.dental.mbg.model.TUser;
 
 public interface UserService {
     /*

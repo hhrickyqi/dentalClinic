@@ -1,4 +1,4 @@
-package com.ricky.dentalClinic.api;
+package com.ricky.dentalclinic.dental.api;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;

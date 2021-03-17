@@ -1,4 +1,4 @@
-package com.ricky.dentalClinic.api;
+package com.ricky.dentalclinic.dental.api;
 
 /**
  * 封装API的错误码

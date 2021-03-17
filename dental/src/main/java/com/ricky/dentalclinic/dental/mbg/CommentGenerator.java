@@ -1,4 +1,4 @@
-package com.ricky.dentalClinic.mbg;
+package com.ricky.dentalclinic.dental.mbg;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;

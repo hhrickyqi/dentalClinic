@@ -1,4 +1,4 @@
-package com.ricky.dentalClinic.api;
+package com.ricky.dentalclinic.dental.api;
 
 /**
  * 枚举了一些常用API操作码

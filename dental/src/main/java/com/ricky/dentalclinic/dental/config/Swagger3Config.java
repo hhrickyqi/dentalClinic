@@ -1,4 +1,4 @@
-package com.ricky.dentalClinic.config;
+package com.ricky.dentalclinic.dental.config;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ public class Swagger3Config {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ricky.dentalClinic.controller"))/*
+                .apis(RequestHandlerSelectors.basePackage("com.ricky.dentalclinic.dental.controller"))/*
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))*/
                 .paths(PathSelectors.any())

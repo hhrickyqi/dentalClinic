@@ -1,12 +1,9 @@
-package com.ricky.dentalClinic.service.impl;
+package com.ricky.dentalclinic.dental.service.impl;
 
-import com.ricky.dentalClinic.mbg.mapper.TUserMapper;
-import com.ricky.dentalClinic.mbg.model.TUser;
-import com.ricky.dentalClinic.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.ricky.dentalclinic.dental.mbg.mapper.TUserMapper;
+import com.ricky.dentalclinic.dental.mbg.model.TUser;
+import com.ricky.dentalclinic.dental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

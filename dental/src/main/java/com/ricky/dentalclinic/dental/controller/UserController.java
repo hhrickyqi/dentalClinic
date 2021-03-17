@@ -1,8 +1,8 @@
-package com.ricky.dentalClinic.controller;
+package com.ricky.dentalclinic.dental.controller;
 
-import com.ricky.dentalClinic.api.CommonResult;
-import com.ricky.dentalClinic.mbg.model.TUser;
-import com.ricky.dentalClinic.service.UserService;
+import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.dental.mbg.model.TUser;
+import com.ricky.dentalclinic.dental.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
