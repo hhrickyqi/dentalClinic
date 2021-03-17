@@ -25,6 +25,7 @@
         <java.version>1.8</java.version>
         <dental.version>1.0-SNAPSHOT</dental.version>
         <security.version>1.0-SNAPSHOT</security.version>
+        <hutool.version>4.5.7</hutool.version>
     </properties>
 
     <dependencies>
@@ -108,6 +109,12 @@
                 <groupId>com.ricky.dentalClinic</groupId>
                 <artifactId>security</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
