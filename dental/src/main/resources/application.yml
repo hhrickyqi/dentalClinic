@@ -42,6 +42,7 @@ secure:
       - /swagger-resources/**
       - /swagger/**
       - /**/v2/api-docs
+      - /**/v3/api-docs
       - /**/*.js
       - /**/*.css
       - /**/*.png
@@ -53,5 +54,9 @@ secure:
       - /index.html
       - /user/login
       - /user/refreshToken
-      - /user/getPersonalInfo
       - /user/register
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
