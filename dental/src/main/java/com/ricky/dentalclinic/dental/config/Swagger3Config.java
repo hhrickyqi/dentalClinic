@@ -1,6 +1,5 @@
 package com.ricky.dentalclinic.dental.config;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,16 +48,14 @@ public class Swagger3Config {
 
     private List<SecurityScheme> securitySchemes() {
         //设置请求头信息
-        List<ApiKey> result = new ArrayList<>();
         ApiKey apiKey = new ApiKey("Authorization", "Authorization", "header");
-        result.add(apiKey);
         return Collections.singletonList(apiKey);
     }
 
     private List<SecurityContext> securityContexts() {
         //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
-        result.add(getContextByPath("/brand/.*"));
+        result.add(getContextByPath("/user/getPersonalInfo"));
         return result;
     }
 
