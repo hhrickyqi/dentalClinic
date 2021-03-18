@@ -1,22 +1,48 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
+import com.ricky.dentalclinic.dental.dao.UserDao;
+import com.ricky.dentalclinic.dental.domain.AdminUserDetails;
+import com.ricky.dentalclinic.dental.exception.Asserts;
 import com.ricky.dentalclinic.dental.mbg.mapper.TUserMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
+import com.ricky.dentalclinic.dental.mbg.model.TUserExample;
 import com.ricky.dentalclinic.dental.service.UserService;
+import com.ricky.dentalclinic.security.util.JwtTokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private TUserMapper userMapper;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public TUser getPersonalInfo(int id) {
         TUser userInfo = userMapper.selectByPrimaryKey(id);
         return userInfo;
     }
-    /*@Override
+
+    @Override
     public void register(String username, String password, String telephone, String name, String sex) {
         //查询是否已有该用户
         TUserExample example = new TUserExample();
@@ -46,7 +72,7 @@ public class UserServiceImpl implements UserService {
         String token = null;
         //密码需要客户端加密后传递
         try {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = loadUserByUsername(username);
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码错误");
             }
@@ -57,5 +83,25 @@ public class UserServiceImpl implements UserService {
             LOGGER.warn("登陆异常:{}", e.getMessage());
         }
         return token;
-    }*/
+    }
+
+    @Override
+    public String refreshToken(String token) {
+        return jwtTokenUtil.refreshHeadToken(token);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        TUser user = getByUsername(username);
+        if (user != null) {
+            return new AdminUserDetails(user);
+        }
+        throw new UsernameNotFoundException("用户名或密码错误");
+    }
+
+    private TUser getByUsername(String username) {
+        TUser user = userDao.getUser(username);
+        if (user != null) return user;
+        return null;
+    }
 }

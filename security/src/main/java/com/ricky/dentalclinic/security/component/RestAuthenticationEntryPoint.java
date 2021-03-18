@@ -1,7 +1,7 @@
 package com.ricky.dentalclinic.security.component;
 
 import cn.hutool.json.JSONUtil;
-import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.security.util.CommonResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 

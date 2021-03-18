@@ -6,19 +6,27 @@ import com.ricky.dentalclinic.dental.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Api(tags = "UserController", description = "用户管理")
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
     @Autowired
     private UserService userService;
 
-    /*@ApiOperation("用户注册")
+    @ApiOperation("用户注册")
     @PostMapping(value = "/register")
     @ResponseBody
     public CommonResult register(@RequestParam(value = "username") String username,
@@ -43,7 +51,22 @@ public class UserController {
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
-    }*/
+    }
+
+    @ApiOperation(value = "刷新token")
+    @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult refreshToken(HttpServletRequest request) {
+        String token = request.getHeader(tokenHeader);
+        String refreshToken = userService.refreshToken(token);
+        if (refreshToken == null) {
+            return CommonResult.failed("token已经过期！");
+        }
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", refreshToken);
+        tokenMap.put("tokenHead", tokenHead);
+        return CommonResult.success(tokenMap);
+    }
 
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getPersonalInfo")
