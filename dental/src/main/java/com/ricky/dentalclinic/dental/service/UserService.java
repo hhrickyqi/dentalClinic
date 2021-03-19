@@ -30,4 +30,9 @@ public interface UserService {
      * 获取用户信息
      */
     UserDetails loadUserByUsername(String username);
+
+    /*
+    登陆后修改密码
+     */
+    int easyUpdatePassword(int id, String password);
 }

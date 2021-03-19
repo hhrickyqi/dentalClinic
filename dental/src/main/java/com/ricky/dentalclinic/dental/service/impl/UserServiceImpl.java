@@ -99,6 +99,13 @@ public class UserServiceImpl implements UserService {
         throw new UsernameNotFoundException("用户名或密码错误");
     }
 
+    @Override
+    public int easyUpdatePassword(int id, String password) {
+        TUser user = userMapper.selectByPrimaryKey(id);
+        user.setPassword(passwordEncoder.encode(password));
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
     private TUser getByUsername(String username) {
         TUser user = userDao.getUser(username);
         if (user != null) return user;

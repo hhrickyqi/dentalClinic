@@ -68,6 +68,26 @@ public class UserController {
         return CommonResult.success(tokenMap);
     }
 
+    @ApiOperation("登陆后修改密码")
+    @RequestMapping(value = "/easyUpdatePassword", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult easyUpdatePassword(@RequestParam int id,
+                                           @RequestParam String password) {
+        int count = userService.easyUpdatePassword(id, password);
+        if (count >= 0) {
+            return CommonResult.success(count,"密码修改成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation(value = "登出功能")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout() {
+
+        return CommonResult.success(null);
+    }
+
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getPersonalInfo")
     @ResponseBody
