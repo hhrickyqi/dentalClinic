@@ -56,6 +56,8 @@ public class Swagger3Config {
         //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
         result.add(getContextByPath("/user/getPersonalInfo"));
+        result.add(getContextByPath("/user/easyUpdatePassword"));
+        result.add(getContextByPath("/file/.*"));
         return result;
     }
 

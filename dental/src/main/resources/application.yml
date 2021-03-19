@@ -16,10 +16,14 @@ spring:
         login-password: druid
   main:
     allow-bean-definition-overriding: true
-
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 10MB
+      max-file-size: 10MB
 
 mybatis:
   mapper-locations:
@@ -55,6 +59,7 @@ secure:
       - /user/login
       - /user/refreshToken
       - /user/register
+      - /user/logout
 
 springfox:
   documentation:
