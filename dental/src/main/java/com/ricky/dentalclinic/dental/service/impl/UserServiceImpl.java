@@ -2,6 +2,7 @@ package com.ricky.dentalclinic.dental.service.impl;
 
 import com.ricky.dentalclinic.dental.dao.UserDao;
 import com.ricky.dentalclinic.dental.domain.AdminUserDetails;
+import com.ricky.dentalclinic.dental.domain.UserInfoParam;
 import com.ricky.dentalclinic.dental.exception.Asserts;
 import com.ricky.dentalclinic.dental.mbg.mapper.TUserMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
@@ -103,6 +104,16 @@ public class UserServiceImpl implements UserService {
     public int easyUpdatePassword(int id, String password) {
         TUser user = userMapper.selectByPrimaryKey(id);
         user.setPassword(passwordEncoder.encode(password));
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int updateInfo(UserInfoParam userInfo) {
+        TUser user = new TUser();
+        user.setId(userInfo.getId());
+        user.setIcon(userInfo.getIcon());
+        user.setName(userInfo.getName());
+        user.setPhoneNumber(userInfo.getPhoneNumber());
         return userMapper.updateByPrimaryKeySelective(user);
     }
 

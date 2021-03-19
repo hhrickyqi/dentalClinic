@@ -57,6 +57,7 @@ public class Swagger3Config {
         List<SecurityContext> result = new ArrayList<>();
         result.add(getContextByPath("/user/getPersonalInfo"));
         result.add(getContextByPath("/user/easyUpdatePassword"));
+        result.add(getContextByPath("/user/updateInfo"));
         result.add(getContextByPath("/file/.*"));
         return result;
     }

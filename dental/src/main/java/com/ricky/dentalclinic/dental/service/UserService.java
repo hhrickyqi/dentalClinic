@@ -1,6 +1,7 @@
 package com.ricky.dentalclinic.dental.service;
 
 
+import com.ricky.dentalclinic.dental.domain.UserInfoParam;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,4 +36,8 @@ public interface UserService {
     登陆后修改密码
      */
     int easyUpdatePassword(int id, String password);
+    /*
+    登陆后修改个人信息
+     */
+    int updateInfo(UserInfoParam userInfo);
 }

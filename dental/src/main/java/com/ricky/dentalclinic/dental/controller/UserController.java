@@ -1,6 +1,7 @@
 package com.ricky.dentalclinic.dental.controller;
 
 import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.dental.domain.UserInfoParam;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
 import com.ricky.dentalclinic.dental.service.UserService;
 import io.swagger.annotations.Api;
@@ -94,6 +95,17 @@ public class UserController {
     public CommonResult gerPersonalInfo(int id) {
         TUser userInfo = userService.getPersonalInfo(id);
         return CommonResult.success(userInfo);
+    }
+
+    @ApiOperation("修改个人信息")
+    @PostMapping("/updateInfo")
+    @ResponseBody
+    public CommonResult updateInfo(@RequestBody UserInfoParam userInfo) {
+        int count = userService.updateInfo(userInfo);
+        if (count >= 0) {
+            return CommonResult.success(count,"修改成功");
+        }
+        return CommonResult.failed();
     }
 
 }
