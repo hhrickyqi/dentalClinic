@@ -1,7 +1,9 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.ricky.dentalclinic.dental.dao.CaseDao;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
+import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -63,6 +66,12 @@ public class CaseServiceImpl implements CaseService {
         }
         tCase.setBirthday(date);
         return caseMapper.updateByPrimaryKeySelective(tCase);
+    }
+
+    @Override
+    public List<TCase> listCase(CaseQueryParam queryParam, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        return caseDao.listCase(queryParam);
     }
 
     //生成病历号

@@ -8,4 +8,32 @@
         WHERE
         id = #{id}
     </update>
+    <select id="listCase" resultMap="com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper.BaseResultMap">
+        SELECT *
+        FROM
+        t_case
+        WHERE
+        is_delete = 0
+        <if test="queryParam.name != null and queryParam.name != ''">
+            AND name LIKE concat("%",#{queryParam.name},"%")
+        </if>
+        <if test="queryParam.sex != null and queryParam.sex != ''">
+            AND sex = #{queryParam.sex}
+        </if>
+        <if test="queryParam.birthday != null and queryParam.birthday != ''">
+            AND birthday LIKE concat("%",#{queryParam.birthday},"%")
+        </if>
+        <if test="queryParam.phoneNumber != null and queryParam.phoneNumber != ''">
+            AND phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
+        </if>
+        <if test="queryParam.date != null and queryParam.date != ''">
+            AND date LIKE concat("%",#{queryParam.date},"%")
+        </if>
+        <if test="queryParam.caseNo != null and queryParam.caseNo != ''">
+            AND case_no LIKE concat("%",#{queryParam.caseNo},"%")
+        </if>
+        ORDER BY
+        date
+        DESC
+    </select>
 </mapper>

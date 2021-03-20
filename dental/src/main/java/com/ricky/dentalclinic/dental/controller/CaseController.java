@@ -1,7 +1,9 @@
 package com.ricky.dentalclinic.dental.controller;
 
+import com.ricky.dentalclinic.dental.api.CommonPage;
 import com.ricky.dentalclinic.dental.api.CommonResult;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
+import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
 import io.swagger.annotations.Api;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "CaseController", description = "病人信息管理")
 @Controller
@@ -53,5 +56,15 @@ public class CaseController {
             return CommonResult.success(count,"修改成功！");
         }
         return CommonResult.failed();
+    }
+
+    @ApiOperation("查询病人信息")
+    @RequestMapping(value = "/listCase", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<TCase>> list(CaseQueryParam queryParam,
+                                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<TCase> caseList = caseService.listCase(queryParam, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(caseList));
     }
 }
