@@ -1,6 +1,8 @@
 package com.ricky.dentalclinic.dental.mbg.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,12 +17,14 @@ public class TCase implements Serializable {
     private String sex;
 
     @ApiModelProperty(value = "出生日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @ApiModelProperty(value = "联系电话")
     private String phoneNumber;
 
     @ApiModelProperty(value = "日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @ApiModelProperty(value = "病历号")

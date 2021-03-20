@@ -59,6 +59,7 @@ public class Swagger3Config {
         result.add(getContextByPath("/user/easyUpdatePassword"));
         result.add(getContextByPath("/user/updateInfo"));
         result.add(getContextByPath("/file/.*"));
+        result.add(getContextByPath("/case/.*"));
         return result;
     }
 
