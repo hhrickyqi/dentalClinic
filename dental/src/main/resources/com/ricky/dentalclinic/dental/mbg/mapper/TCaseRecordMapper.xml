@@ -7,6 +7,7 @@
     <result column="dentist_id" jdbcType="INTEGER" property="dentistId" />
     <result column="record" jdbcType="VARCHAR" property="record" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, case_id, dentist_id, record, date, is_delete
+    id, case_id, dentist_id, record, date, price, is_delete
   </sql>
   <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecordExample" resultMap="BaseResultMap">
     select
@@ -105,9 +106,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_case_record (case_id, dentist_id, record, 
-      date, is_delete)
+      date, price, is_delete
+      )
     values (#{caseId,jdbcType=INTEGER}, #{dentistId,jdbcType=INTEGER}, #{record,jdbcType=VARCHAR}, 
-      #{date,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+      #{date,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{isDelete,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecord">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -127,6 +130,9 @@
       <if test="date != null">
         date,
       </if>
+      <if test="price != null">
+        price,
+      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -143,6 +149,9 @@
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
@@ -173,6 +182,9 @@
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=INTEGER},
       </if>
@@ -188,6 +200,7 @@
       dentist_id = #{record.dentistId,jdbcType=INTEGER},
       record = #{record.record,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
+      price = #{record.price,jdbcType=DECIMAL},
       is_delete = #{record.isDelete,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -208,6 +221,9 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
@@ -220,6 +236,7 @@
       dentist_id = #{dentistId,jdbcType=INTEGER},
       record = #{record,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL},
       is_delete = #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

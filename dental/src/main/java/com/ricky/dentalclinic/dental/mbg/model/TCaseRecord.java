@@ -2,6 +2,7 @@ package com.ricky.dentalclinic.dental.mbg.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TCaseRecord implements Serializable {
@@ -19,6 +20,9 @@ public class TCaseRecord implements Serializable {
 
     @ApiModelProperty(value = "记录时间")
     private Date date;
+
+    @ApiModelProperty(value = "本次治疗收费")
+    private BigDecimal price;
 
     @ApiModelProperty(value = "是否删除：0-否 1-是")
     private Integer isDelete;
@@ -65,6 +69,14 @@ public class TCaseRecord implements Serializable {
         this.date = date;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Integer getIsDelete() {
         return isDelete;
     }
@@ -84,6 +96,7 @@ public class TCaseRecord implements Serializable {
         sb.append(", dentistId=").append(dentistId);
         sb.append(", record=").append(record);
         sb.append(", date=").append(date);
+        sb.append(", price=").append(price);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

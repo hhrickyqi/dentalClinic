@@ -60,6 +60,7 @@ public class Swagger3Config {
         result.add(getContextByPath("/user/updateInfo"));
         result.add(getContextByPath("/file/.*"));
         result.add(getContextByPath("/case/.*"));
+        result.add(getContextByPath("/caseRecord/.*"));
         return result;
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ricky.dentalclinic.dental.dao.CaseRecordDao">
+    <select id="listCaseRecord" resultMap="com.ricky.dentalclinic.dental.mbg.mapper.TCaseRecordMapper.BaseResultMap">
+        SELECT *
+        FROM
+        t_case_record
+        WHERE
+        is_delete = 0
+        <if test="queryParam.caseId != null and queryParam.caseId != ''">
+            AND case_id = #{queryParam.caseId}
+        </if>
+        <if test="queryParam.dentistId != null and queryParam.dentistId != ''">
+            AND dentist_id = #{queryParam.dentistId}
+        </if>
+        <if test="queryParam.date != null and queryParam.date != ''">
+            AND date LIKE concat("%",#{queryParam.date},"%")
+        </if>
+        ORDER BY
+        date
+    </select>
+</mapper>
