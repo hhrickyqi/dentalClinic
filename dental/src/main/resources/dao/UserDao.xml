@@ -9,4 +9,23 @@
         WHERE
         username = #{username}
     </select>
+    <select id="listUser" resultMap="com.ricky.dentalclinic.dental.mbg.mapper.TUserMapper.BaseResultMap">
+        SELECT *
+        FROM
+        t_user
+        WHERE
+        is_delete = 0
+        <if test="queryParam.name != null and queryParam.name != ''">
+            AND name LIKE concat("%",#{queryParam.name},"%")
+        </if>
+        <if test="queryParam.sex != null and queryParam.sex != ''">
+            AND sex = #{queryParam.sex}
+        </if>
+        <if test="queryParam.type != null and queryParam.type != ''">
+            AND birthday = #{queryParam.type}
+        </if>
+        <if test="queryParam.phoneNumber != null and queryParam.phoneNumber != ''">
+            AND phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
+        </if>
+    </select>
 </mapper>

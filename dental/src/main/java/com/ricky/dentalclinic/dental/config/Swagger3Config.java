@@ -58,6 +58,10 @@ public class Swagger3Config {
         result.add(getContextByPath("/user/getPersonalInfo"));
         result.add(getContextByPath("/user/easyUpdatePassword"));
         result.add(getContextByPath("/user/updateInfo"));
+        result.add(getContextByPath("/user/getCurrentInfo"));
+        result.add(getContextByPath("/user/listUser"));
+        result.add(getContextByPath("/user/deleteUser"));
+        result.add(getContextByPath("/user/modifyUserPermissions"));
         result.add(getContextByPath("/file/.*"));
         result.add(getContextByPath("/case/.*"));
         result.add(getContextByPath("/caseRecord/.*"));

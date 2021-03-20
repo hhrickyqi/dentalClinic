@@ -1,8 +1,10 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.ricky.dentalclinic.dental.dao.UserDao;
 import com.ricky.dentalclinic.dental.domain.AdminUserDetails;
 import com.ricky.dentalclinic.dental.domain.UserInfoParam;
+import com.ricky.dentalclinic.dental.domain.UserQueryParam;
 import com.ricky.dentalclinic.dental.exception.Asserts;
 import com.ricky.dentalclinic.dental.mbg.mapper.TUserMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
@@ -14,7 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -116,6 +120,43 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userInfo.getPhoneNumber());
         return userMapper.updateByPrimaryKeySelective(user);
     }
+
+    @Override
+    public TUser getCurrentInfo() {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        AdminUserDetails userDetails = (AdminUserDetails) auth.getPrincipal();
+        return userDetails.getUser();
+    }
+
+    @Override
+    public List<TUser> listUser(UserQueryParam queryParam, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        return userDao.listUser(queryParam);
+    }
+
+    @Override
+    public int deleteUser(int id) {
+        if (getCurrentInfo().getType() != 3) {
+            Asserts.fail("用户权限不足！");
+        }
+        TUser user = new TUser();
+        user.setId(id);
+        user.setIsDelete(1);
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int modifyUserPermissions(int id, int type) {
+        if (getCurrentInfo().getType() != 3) {
+            Asserts.fail("用户权限不足！");
+        }
+        TUser user = new TUser();
+        user.setId(id);
+        user.setType(type);
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
 
     private TUser getByUsername(String username) {
         TUser user = userDao.getUser(username);

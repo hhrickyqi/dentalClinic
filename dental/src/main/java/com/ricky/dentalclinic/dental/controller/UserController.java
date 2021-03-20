@@ -1,7 +1,11 @@
 package com.ricky.dentalclinic.dental.controller;
 
+import com.ricky.dentalclinic.dental.api.CommonPage;
 import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.domain.UserInfoParam;
+import com.ricky.dentalclinic.dental.domain.UserQueryParam;
+import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.mbg.model.TUser;
 import com.ricky.dentalclinic.dental.service.UserService;
 import io.swagger.annotations.Api;
@@ -12,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -108,4 +114,47 @@ public class UserController {
         return CommonResult.failed();
     }
 
+    @ApiOperation("获取登录用户信息")
+    @RequestMapping(value = "/getCurrentInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getCurrentInfo(Principal principal) {
+        if (principal == null) {
+            return CommonResult.unauthorized(null);
+        }
+        TUser user = userService.getCurrentInfo();
+        return CommonResult.success(user);
+    }
+
+    @ApiOperation("查询用户列表")
+    @RequestMapping(value = "/listUser", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<TUser>> list(UserQueryParam queryParam,
+                                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<TUser> userList = userService.listUser(queryParam, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(userList));
+    }
+
+    @ApiOperation("删除用户")
+    @PostMapping("/deleteUser")
+    @ResponseBody
+    public CommonResult deleteUser(@RequestParam int id) {
+        int count = userService.deleteUser(id);
+        if (count >= 0) {
+            return CommonResult.success(count,"删除成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("修改用户类型")
+    @PostMapping("/modifyUserPermissions")
+    @ResponseBody
+    public CommonResult modifyUserPermissions(@RequestParam int id,
+                                              @RequestParam int type) {
+        int count = userService.modifyUserPermissions(id, type);
+        if (count >= 0) {
+            return CommonResult.success(count,"修改成功");
+        }
+        return CommonResult.failed();
+    }
 }
