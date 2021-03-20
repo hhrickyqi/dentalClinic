@@ -1,5 +1,6 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
+import com.ricky.dentalclinic.dental.dao.CaseDao;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
@@ -18,6 +19,8 @@ public class CaseServiceImpl implements CaseService {
 
     @Autowired
     private TCaseMapper caseMapper;
+    @Autowired
+    private CaseDao caseDao;
 
     @Override
     public int insertCase(String name, String sex, String birthday, String phoneNumber) {
@@ -36,6 +39,12 @@ public class CaseServiceImpl implements CaseService {
         tCase.setCaseNo(generateCaseNoByDate());
         tCase.setIsDelete(0);
         return caseMapper.insert(tCase);
+    }
+
+    @Override
+    public int deleteCase(int id) {
+        int is_delete = 1;
+        return caseDao.deleteCase(id, is_delete);
     }
 
     //生成病历号

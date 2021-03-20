@@ -34,4 +34,15 @@ public class CaseController {
         }
         return CommonResult.failed();
     }
+
+    @ApiOperation("删除病人信息")
+    @PostMapping("/deleteCase")
+    @ResponseBody
+    public CommonResult deleteCase(@RequestParam int id) {
+        int count = caseService.deleteCase(id);
+        if (count >= 0 ){
+            return CommonResult.success(count,"删除成功！");
+        }
+        return CommonResult.failed();
+    }
 }
