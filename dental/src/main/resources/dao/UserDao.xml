@@ -22,7 +22,7 @@
             AND sex = #{queryParam.sex}
         </if>
         <if test="queryParam.type != null and queryParam.type != ''">
-            AND birthday = #{queryParam.type}
+            AND type = #{queryParam.type}
         </if>
         <if test="queryParam.phoneNumber != null and queryParam.phoneNumber != ''">
             AND phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
