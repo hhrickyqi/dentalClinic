@@ -1,16 +1,14 @@
 package com.ricky.dentalclinic.dental.controller;
 
 import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -42,6 +40,17 @@ public class CaseController {
         int count = caseService.deleteCase(id);
         if (count >= 0 ){
             return CommonResult.success(count,"删除成功！");
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("修改病人信息")
+    @PostMapping("/updateCase")
+    @ResponseBody
+    public CommonResult updateCase(@RequestBody CaseInfoParam caseInfo) {
+        int count = caseService.updateCase(caseInfo);
+        if (count >= 0 ){
+            return CommonResult.success(count,"修改成功！");
         }
         return CommonResult.failed();
     }

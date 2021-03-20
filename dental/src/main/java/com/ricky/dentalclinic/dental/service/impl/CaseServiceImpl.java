@@ -1,6 +1,7 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
 import com.ricky.dentalclinic.dental.dao.CaseDao;
+import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
@@ -45,6 +46,23 @@ public class CaseServiceImpl implements CaseService {
     public int deleteCase(int id) {
         int is_delete = 1;
         return caseDao.deleteCase(id, is_delete);
+    }
+
+    @Override
+    public int updateCase(CaseInfoParam caseInfo) {
+        TCase tCase = new TCase();
+        tCase.setId(caseInfo.getId());
+        tCase.setName(caseInfo.getName());
+        tCase.setSex(caseInfo.getSex());
+        tCase.setPhoneNumber(caseInfo.getPhoneNumber());
+        Date date = null;
+        try {
+            date = sdf.parse(caseInfo.getBirthday());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        tCase.setBirthday(date);
+        return caseMapper.updateByPrimaryKeySelective(tCase);
     }
 
     //生成病历号
