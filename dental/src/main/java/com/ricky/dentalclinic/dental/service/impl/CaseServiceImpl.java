@@ -34,6 +34,7 @@ public class CaseServiceImpl implements CaseService {
         tCase.setPhoneNumber(phoneNumber);
         tCase.setDate(new Date());
         tCase.setCaseNo(generateCaseNoByDate());
+        tCase.setIsDelete(0);
         return caseMapper.insert(tCase);
     }
 

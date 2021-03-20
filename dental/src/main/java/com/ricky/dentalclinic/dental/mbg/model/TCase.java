@@ -30,6 +30,9 @@ public class TCase implements Serializable {
     @ApiModelProperty(value = "病历号")
     private String caseNo;
 
+    @ApiModelProperty(value = "是否删除： 0-否 1-是")
+    private Integer isDelete;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -88,6 +91,14 @@ public class TCase implements Serializable {
         this.caseNo = caseNo;
     }
 
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -101,6 +112,7 @@ public class TCase implements Serializable {
         sb.append(", phoneNumber=").append(phoneNumber);
         sb.append(", date=").append(date);
         sb.append(", caseNo=").append(caseNo);
+        sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
