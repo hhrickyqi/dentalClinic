@@ -18,6 +18,9 @@ public class TCaseRecord implements Serializable {
     @ApiModelProperty(value = "诊断及治疗记录")
     private String record;
 
+    @ApiModelProperty(value = "病例号")
+    private String caseNo;
+
     @ApiModelProperty(value = "记录时间")
     private Date date;
 
@@ -61,6 +64,14 @@ public class TCaseRecord implements Serializable {
         this.record = record;
     }
 
+    public String getCaseNo() {
+        return caseNo;
+    }
+
+    public void setCaseNo(String caseNo) {
+        this.caseNo = caseNo;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -95,6 +106,7 @@ public class TCaseRecord implements Serializable {
         sb.append(", caseId=").append(caseId);
         sb.append(", dentistId=").append(dentistId);
         sb.append(", record=").append(record);
+        sb.append(", caseNo=").append(caseNo);
         sb.append(", date=").append(date);
         sb.append(", price=").append(price);
         sb.append(", isDelete=").append(isDelete);

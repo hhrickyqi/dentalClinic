@@ -2,6 +2,7 @@ package com.ricky.dentalclinic.dental.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ricky.dentalclinic.dental.dao.CaseRecordDao;
+import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseRecordMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
@@ -50,7 +51,7 @@ public class CaseRecordServiceImpl implements CaseRecordService {
     }
 
     @Override
-    public List<TCase> listCaseRecord(CaseRecordQueryParam queryParam, Integer pageSize, Integer pageNum) {
+    public List<CaseRecordParam> listCaseRecord(CaseRecordQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         return caseRecordDao.listCaseRecord(queryParam);
     }

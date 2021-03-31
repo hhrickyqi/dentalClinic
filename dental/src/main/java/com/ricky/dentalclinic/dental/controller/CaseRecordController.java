@@ -2,6 +2,7 @@ package com.ricky.dentalclinic.dental.controller;
 
 import com.ricky.dentalclinic.dental.api.CommonPage;
 import com.ricky.dentalclinic.dental.api.CommonResult;
+import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseRecordService;
@@ -60,10 +61,10 @@ public class CaseRecordController {
     @ApiOperation("查询诊断及治疗信息")
     @RequestMapping(value = "/listCaseRecord", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<TCase>> list(CaseRecordQueryParam queryParam,
-                                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
-                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<TCase> caseList = caseRecordService.listCaseRecord(queryParam, pageSize, pageNum);
+    public CommonResult<CommonPage<CaseRecordParam>> list(CaseRecordQueryParam queryParam,
+                                                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<CaseRecordParam> caseList = caseRecordService.listCaseRecord(queryParam, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(caseList));
     }
 

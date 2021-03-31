@@ -6,6 +6,7 @@
     <result column="case_id" jdbcType="INTEGER" property="caseId" />
     <result column="dentist_id" jdbcType="INTEGER" property="dentistId" />
     <result column="record" jdbcType="VARCHAR" property="record" />
+    <result column="case_no" jdbcType="VARCHAR" property="caseNo" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, case_id, dentist_id, record, date, price, is_delete
+    id, case_id, dentist_id, record, case_no, date, price, is_delete
   </sql>
   <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecordExample" resultMap="BaseResultMap">
     select
@@ -106,11 +107,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_case_record (case_id, dentist_id, record, 
-      date, price, is_delete
-      )
+      case_no, date, price, 
+      is_delete)
     values (#{caseId,jdbcType=INTEGER}, #{dentistId,jdbcType=INTEGER}, #{record,jdbcType=VARCHAR}, 
-      #{date,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{isDelete,jdbcType=INTEGER}
-      )
+      #{caseNo,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, 
+      #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecord">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -126,6 +127,9 @@
       </if>
       <if test="record != null">
         record,
+      </if>
+      <if test="caseNo != null">
+        case_no,
       </if>
       <if test="date != null">
         date,
@@ -146,6 +150,9 @@
       </if>
       <if test="record != null">
         #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNo != null">
+        #{caseNo,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
@@ -179,6 +186,9 @@
       <if test="record.record != null">
         record = #{record.record,jdbcType=VARCHAR},
       </if>
+      <if test="record.caseNo != null">
+        case_no = #{record.caseNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
       </if>
@@ -199,6 +209,7 @@
       case_id = #{record.caseId,jdbcType=INTEGER},
       dentist_id = #{record.dentistId,jdbcType=INTEGER},
       record = #{record.record,jdbcType=VARCHAR},
+      case_no = #{record.caseNo,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
       price = #{record.price,jdbcType=DECIMAL},
       is_delete = #{record.isDelete,jdbcType=INTEGER}
@@ -218,6 +229,9 @@
       <if test="record != null">
         record = #{record,jdbcType=VARCHAR},
       </if>
+      <if test="caseNo != null">
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
@@ -235,6 +249,7 @@
     set case_id = #{caseId,jdbcType=INTEGER},
       dentist_id = #{dentistId,jdbcType=INTEGER},
       record = #{record,jdbcType=VARCHAR},
+      case_no = #{caseNo,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
       price = #{price,jdbcType=DECIMAL},
       is_delete = #{isDelete,jdbcType=INTEGER}

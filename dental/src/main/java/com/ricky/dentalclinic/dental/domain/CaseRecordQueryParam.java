@@ -7,10 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CaseRecordQueryParam {
-    @ApiModelProperty("病历id")
-    private Integer caseId;
-    @ApiModelProperty("治疗医生id")
-    private Integer dentistId;
+    @ApiModelProperty("病人姓名")
+    private String caseName;
+    @ApiModelProperty("治疗医生姓名")
+    private String dentistName;
     @ApiModelProperty("记录时间")
     private String date;
+    @ApiModelProperty("病例号")
+    private String caseNo;
 }

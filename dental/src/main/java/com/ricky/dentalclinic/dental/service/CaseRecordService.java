@@ -1,5 +1,6 @@
 package com.ricky.dentalclinic.dental.service;
 
+import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 
@@ -26,7 +27,7 @@ public interface CaseRecordService {
     /*
     查询诊断及治疗信息
      */
-    List<TCase> listCaseRecord(CaseRecordQueryParam queryParam, Integer pageSize, Integer pageNum);
+    List<CaseRecordParam> listCaseRecord(CaseRecordQueryParam queryParam, Integer pageSize, Integer pageNum);
 
     /*
     添加收费
