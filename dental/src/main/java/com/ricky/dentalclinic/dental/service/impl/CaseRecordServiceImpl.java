@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.ricky.dentalclinic.dental.dao.CaseRecordDao;
 import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
+import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseRecordMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.mbg.model.TCaseRecord;
@@ -22,6 +23,8 @@ public class CaseRecordServiceImpl implements CaseRecordService {
     private TCaseRecordMapper caseRecordMapper;
     @Autowired
     private CaseRecordDao caseRecordDao;
+    @Autowired
+    private TCaseMapper caseMapper;
 
     @Override
     public int deleteCaseRecord(int id) {
@@ -39,6 +42,7 @@ public class CaseRecordServiceImpl implements CaseRecordService {
         caseRecord.setRecord(record);
         caseRecord.setDate(new Date());
         caseRecord.setIsDelete(0);
+        caseRecord.setCaseNo(caseMapper.selectByPrimaryKey(caseId).getCaseNo());
         return caseRecordMapper.insert(caseRecord);
     }
 
