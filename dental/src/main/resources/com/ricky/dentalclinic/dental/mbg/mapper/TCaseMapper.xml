@@ -8,6 +8,7 @@
     <result column="identity_card" jdbcType="VARCHAR" property="identityCard" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="dentist_id" jdbcType="INTEGER" property="dentistId" />
     <result column="date" jdbcType="DATE" property="date" />
     <result column="case_no" jdbcType="VARCHAR" property="caseNo" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, sex, identity_card, birthday, phone_number, date, case_no, is_delete
+    id, name, sex, identity_card, birthday, phone_number, dentist_id, date, case_no, 
+    is_delete
   </sql>
   <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseExample" resultMap="BaseResultMap">
     select
@@ -108,11 +110,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_case (name, sex, identity_card, 
-      birthday, phone_number, date, 
-      case_no, is_delete)
+      birthday, phone_number, dentist_id, 
+      date, case_no, is_delete
+      )
     values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
-      #{birthday,jdbcType=DATE}, #{phoneNumber,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
-      #{caseNo,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER})
+      #{birthday,jdbcType=DATE}, #{phoneNumber,jdbcType=VARCHAR}, #{dentistId,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE}, #{caseNo,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCase">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -134,6 +138,9 @@
       </if>
       <if test="phoneNumber != null">
         phone_number,
+      </if>
+      <if test="dentistId != null">
+        dentist_id,
       </if>
       <if test="date != null">
         date,
@@ -160,6 +167,9 @@
       </if>
       <if test="phoneNumber != null">
         #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dentistId != null">
+        #{dentistId,jdbcType=INTEGER},
       </if>
       <if test="date != null">
         #{date,jdbcType=DATE},
@@ -199,6 +209,9 @@
       <if test="record.phoneNumber != null">
         phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       </if>
+      <if test="record.dentistId != null">
+        dentist_id = #{record.dentistId,jdbcType=INTEGER},
+      </if>
       <if test="record.date != null">
         date = #{record.date,jdbcType=DATE},
       </if>
@@ -221,6 +234,7 @@
       identity_card = #{record.identityCard,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=DATE},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      dentist_id = #{record.dentistId,jdbcType=INTEGER},
       date = #{record.date,jdbcType=DATE},
       case_no = #{record.caseNo,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=INTEGER}
@@ -246,6 +260,9 @@
       <if test="phoneNumber != null">
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
+      <if test="dentistId != null">
+        dentist_id = #{dentistId,jdbcType=INTEGER},
+      </if>
       <if test="date != null">
         date = #{date,jdbcType=DATE},
       </if>
@@ -265,6 +282,7 @@
       identity_card = #{identityCard,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=DATE},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      dentist_id = #{dentistId,jdbcType=INTEGER},
       date = #{date,jdbcType=DATE},
       case_no = #{caseNo,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER}

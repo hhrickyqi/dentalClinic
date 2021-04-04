@@ -6,6 +6,15 @@ public class CaseInfoParam {
     private String sex;
     private String birthday;
     private String phoneNumber;
+    private Integer dentistId;
+
+    public Integer getDentistId() {
+        return dentistId;
+    }
+
+    public void setDentistId(Integer dentistId) {
+        this.dentistId = dentistId;
+    }
 
     public Integer getId() {
         return id;

@@ -8,32 +8,76 @@
         WHERE
         id = #{id}
     </update>
-    <select id="listCase" resultMap="com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper.BaseResultMap">
-        SELECT *
+    <select id="listCase" resultType="com.ricky.dentalclinic.dental.domain.CaseResultWithDentist">
+        SELECT tc.*, tu.name as dentistName
         FROM
-        t_case
+        t_case tc
+        LEFT JOIN
+        t_user tu
+        ON
+        tc.dentist_id = tu.id
         WHERE
-        is_delete = 0
+        tc.is_delete = 0
         <if test="queryParam.name != null and queryParam.name != ''">
-            AND name LIKE concat("%",#{queryParam.name},"%")
+            AND tc.name LIKE concat("%",#{queryParam.name},"%")
         </if>
         <if test="queryParam.sex != null and queryParam.sex != ''">
-            AND sex = #{queryParam.sex}
+            AND tc.sex = #{queryParam.sex}
         </if>
         <if test="queryParam.birthday != null and queryParam.birthday != ''">
-            AND birthday LIKE concat("%",#{queryParam.birthday},"%")
+            AND tc.birthday LIKE concat("%",#{queryParam.birthday},"%")
         </if>
         <if test="queryParam.phoneNumber != null and queryParam.phoneNumber != ''">
-            AND phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
+            AND tc.phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
         </if>
         <if test="queryParam.date != null and queryParam.date != ''">
-            AND date LIKE concat("%",#{queryParam.date},"%")
+            AND tc.date LIKE concat("%",#{queryParam.date},"%")
         </if>
         <if test="queryParam.caseNo != null and queryParam.caseNo != ''">
-            AND case_no LIKE concat("%",#{queryParam.caseNo},"%")
+            AND tc.case_no LIKE concat("%",#{queryParam.caseNo},"%")
+        </if>
+        <if test="queryParam.identityCard != null and queryParam.identityCard != ''">
+            AND tc.identity_card LIKE concat("%",#{queryParam.identityCard},"%")
         </if>
         ORDER BY
-        date
+        tc.date
+        DESC
+    </select>
+    <select id="listCaseByDentist" resultType="com.ricky.dentalclinic.dental.domain.CaseResultWithDentist">
+        SELECT tc.*, tu.name as dentistName
+        FROM
+        t_case tc
+        LEFT JOIN
+        t_user tu
+        ON
+        tc.dentist_id = tu.id
+        WHERE
+        tc.is_delete = 0
+        AND
+        tc.dentist_id = #{dentistId}
+        <if test="queryParam.name != null and queryParam.name != ''">
+            AND tc.name LIKE concat("%",#{queryParam.name},"%")
+        </if>
+        <if test="queryParam.sex != null and queryParam.sex != ''">
+            AND tc.sex = #{queryParam.sex}
+        </if>
+        <if test="queryParam.birthday != null and queryParam.birthday != ''">
+            AND tc.birthday LIKE concat("%",#{queryParam.birthday},"%")
+        </if>
+        <if test="queryParam.phoneNumber != null and queryParam.phoneNumber != ''">
+            AND tc.phone_number LIKE concat("%",#{queryParam.phoneNumber},"%")
+        </if>
+        <if test="queryParam.date != null and queryParam.date != ''">
+            AND tc.date LIKE concat("%",#{queryParam.date},"%")
+        </if>
+        <if test="queryParam.caseNo != null and queryParam.caseNo != ''">
+            AND tc.case_no LIKE concat("%",#{queryParam.caseNo},"%")
+        </if>
+        <if test="queryParam.identityCard != null and queryParam.identityCard != ''">
+            AND tc.identity_card LIKE concat("%",#{queryParam.identityCard},"%")
+        </if>
+        ORDER BY
+        tc.date
         DESC
     </select>
 </mapper>

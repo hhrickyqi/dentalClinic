@@ -4,9 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.ricky.dentalclinic.dental.dao.CaseDao;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
+import com.ricky.dentalclinic.dental.domain.CaseResultWithDentist;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
+import com.ricky.dentalclinic.dental.mbg.model.TCaseExample;
 import com.ricky.dentalclinic.dental.service.CaseService;
+import com.ricky.dentalclinic.dental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +28,11 @@ public class CaseServiceImpl implements CaseService {
     private TCaseMapper caseMapper;
     @Autowired
     private CaseDao caseDao;
+    @Autowired
+    private UserService userService;
 
     @Override
-    public int insertCase(String name, String sex, String birthday, String phoneNumber) {
+    public int insertCase(String name, String sex, String birthday, String phoneNumber, String identityCard, Integer dentistId) {
         TCase tCase = new TCase();
         tCase.setName(name);
         tCase.setSex(sex);
@@ -41,6 +46,8 @@ public class CaseServiceImpl implements CaseService {
         tCase.setPhoneNumber(phoneNumber);
         tCase.setDate(new Date());
         tCase.setCaseNo(generateCaseNoByDate());
+        tCase.setIdentityCard(identityCard);
+        tCase.setDentistId(dentistId);
         tCase.setIsDelete(0);
         return caseMapper.insert(tCase);
     }
@@ -58,20 +65,38 @@ public class CaseServiceImpl implements CaseService {
         tCase.setName(caseInfo.getName());
         tCase.setSex(caseInfo.getSex());
         tCase.setPhoneNumber(caseInfo.getPhoneNumber());
-        Date date = null;
-        try {
-            date = sdf.parse(caseInfo.getBirthday());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        String birthday = caseInfo.getBirthday();
+        if (birthday != null) {
+            Date date = null;
+            try {
+                date = sdf.parse(birthday);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            tCase.setBirthday(date);
         }
-        tCase.setBirthday(date);
+        tCase.setDentistId(caseInfo.getDentistId());
         return caseMapper.updateByPrimaryKeySelective(tCase);
     }
 
     @Override
-    public List<TCase> listCase(CaseQueryParam queryParam, Integer pageSize, Integer pageNum) {
+    public List<CaseResultWithDentist> listCase(CaseQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         return caseDao.listCase(queryParam);
+    }
+
+    @Override
+    public List<TCase> verifyIdCard(String identityCard) {
+        TCaseExample caseExample = new TCaseExample();
+        caseExample.createCriteria().andIdentityCardEqualTo(identityCard);
+        return caseMapper.selectByExample(caseExample);
+    }
+
+    @Override
+    public List<CaseResultWithDentist> listCaseByDentist(CaseQueryParam queryParam, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        int dentistId = userService.getCurrentInfo().getId();
+        return caseDao.listCaseByDentist(dentistId, queryParam);
     }
 
     //生成病历号

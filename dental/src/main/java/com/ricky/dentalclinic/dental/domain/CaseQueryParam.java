@@ -19,6 +19,16 @@ public class CaseQueryParam {
     private String date;
     @ApiModelProperty(value = "病历号")
     private String caseNo;
+    @ApiModelProperty(value = "身份证")
+    private String identityCard;
+
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
 
     public String getName() {
         return name;

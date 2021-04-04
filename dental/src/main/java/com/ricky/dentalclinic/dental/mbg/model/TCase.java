@@ -16,12 +16,18 @@ public class TCase implements Serializable {
     @ApiModelProperty(value = "性别")
     private String sex;
 
+    @ApiModelProperty(value = "身份证")
+    private String identityCard;
+
     @ApiModelProperty(value = "出生日期")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @ApiModelProperty(value = "联系电话")
     private String phoneNumber;
+
+    @ApiModelProperty(value = "治疗医师id")
+    private Integer dentistId;
 
     @ApiModelProperty(value = "日期")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -59,6 +65,14 @@ public class TCase implements Serializable {
         this.sex = sex;
     }
 
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
+
     public Date getBirthday() {
         return birthday;
     }
@@ -73,6 +87,14 @@ public class TCase implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getDentistId() {
+        return dentistId;
+    }
+
+    public void setDentistId(Integer dentistId) {
+        this.dentistId = dentistId;
     }
 
     public Date getDate() {
@@ -108,8 +130,10 @@ public class TCase implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", sex=").append(sex);
+        sb.append(", identityCard=").append(identityCard);
         sb.append(", birthday=").append(birthday);
         sb.append(", phoneNumber=").append(phoneNumber);
+        sb.append(", dentistId=").append(dentistId);
         sb.append(", date=").append(date);
         sb.append(", caseNo=").append(caseNo);
         sb.append(", isDelete=").append(isDelete);

@@ -532,6 +532,66 @@ public class TCaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andDentistIdIsNull() {
+            addCriterion("dentist_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdIsNotNull() {
+            addCriterion("dentist_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdEqualTo(Integer value) {
+            addCriterion("dentist_id =", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdNotEqualTo(Integer value) {
+            addCriterion("dentist_id <>", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdGreaterThan(Integer value) {
+            addCriterion("dentist_id >", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dentist_id >=", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdLessThan(Integer value) {
+            addCriterion("dentist_id <", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdLessThanOrEqualTo(Integer value) {
+            addCriterion("dentist_id <=", value, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdIn(List<Integer> values) {
+            addCriterion("dentist_id in", values, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdNotIn(List<Integer> values) {
+            addCriterion("dentist_id not in", values, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdBetween(Integer value1, Integer value2) {
+            addCriterion("dentist_id between", value1, value2, "dentistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDentistIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("dentist_id not between", value1, value2, "dentistId");
+            return (Criteria) this;
+        }
+
         public Criteria andDateIsNull() {
             addCriterion("date is null");
             return (Criteria) this;
