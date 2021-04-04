@@ -32,7 +32,7 @@ public class TUser implements Serializable {
     @ApiModelProperty(value = "是否删除 0-未删除 1-已删除")
     private Integer isDelete;
 
-    @ApiModelProperty(value = "用户类型: 0-无权限 1-医生 2-管理员")
+    @ApiModelProperty(value = "用户类型: 0-无权限 1-医生 2-管理员 3-超级管理员")
     private Integer type;
 
     private static final long serialVersionUID = 1L;

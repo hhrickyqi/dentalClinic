@@ -24,6 +24,9 @@ public class TCaseRecord implements Serializable {
     @ApiModelProperty(value = "记录时间")
     private Date date;
 
+    @ApiModelProperty(value = "收费项目")
+    private String chargeItems;
+
     @ApiModelProperty(value = "本次治疗收费")
     private BigDecimal price;
 
@@ -80,6 +83,14 @@ public class TCaseRecord implements Serializable {
         this.date = date;
     }
 
+    public String getChargeItems() {
+        return chargeItems;
+    }
+
+    public void setChargeItems(String chargeItems) {
+        this.chargeItems = chargeItems;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -108,6 +119,7 @@ public class TCaseRecord implements Serializable {
         sb.append(", record=").append(record);
         sb.append(", caseNo=").append(caseNo);
         sb.append(", date=").append(date);
+        sb.append(", chargeItems=").append(chargeItems);
         sb.append(", price=").append(price);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);

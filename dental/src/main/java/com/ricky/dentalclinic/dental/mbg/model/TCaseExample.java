@@ -332,6 +332,76 @@ public class TCaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andIdentityCardIsNull() {
+            addCriterion("identity_card is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardIsNotNull() {
+            addCriterion("identity_card is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardEqualTo(String value) {
+            addCriterion("identity_card =", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardNotEqualTo(String value) {
+            addCriterion("identity_card <>", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardGreaterThan(String value) {
+            addCriterion("identity_card >", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardGreaterThanOrEqualTo(String value) {
+            addCriterion("identity_card >=", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardLessThan(String value) {
+            addCriterion("identity_card <", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardLessThanOrEqualTo(String value) {
+            addCriterion("identity_card <=", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardLike(String value) {
+            addCriterion("identity_card like", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardNotLike(String value) {
+            addCriterion("identity_card not like", value, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardIn(List<String> values) {
+            addCriterion("identity_card in", values, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardNotIn(List<String> values) {
+            addCriterion("identity_card not in", values, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardBetween(String value1, String value2) {
+            addCriterion("identity_card between", value1, value2, "identityCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityCardNotBetween(String value1, String value2) {
+            addCriterion("identity_card not between", value1, value2, "identityCard");
+            return (Criteria) this;
+        }
+
         public Criteria andBirthdayIsNull() {
             addCriterion("birthday is null");
             return (Criteria) this;

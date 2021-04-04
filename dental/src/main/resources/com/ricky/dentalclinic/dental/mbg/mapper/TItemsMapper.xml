@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper">
-  <resultMap id="BaseResultMap" type="com.ricky.dentalclinic.dental.mbg.model.TCase">
+<mapper namespace="com.ricky.dentalclinic.dental.mbg.mapper.TItemsMapper">
+  <resultMap id="BaseResultMap" type="com.ricky.dentalclinic.dental.mbg.model.TItems">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="identity_card" jdbcType="VARCHAR" property="identityCard" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="case_no" jdbcType="VARCHAR" property="caseNo" />
+    <result column="item" jdbcType="VARCHAR" property="item" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, sex, identity_card, birthday, phone_number, date, case_no, is_delete
+    id, item, cost, is_delete
   </sql>
-  <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItemsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_case
+    from t_items
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,120 +85,73 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_case
+    from t_items
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_case
+    delete from t_items
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseExample">
-    delete from t_case
+  <delete id="deleteByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItemsExample">
+    delete from t_items
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCase">
+  <insert id="insert" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItems">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_case (name, sex, identity_card, 
-      birthday, phone_number, date, 
-      case_no, is_delete)
-    values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
-      #{birthday,jdbcType=DATE}, #{phoneNumber,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
-      #{caseNo,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER})
+    insert into t_items (item, cost, is_delete
+      )
+    values (#{item,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, #{isDelete,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCase">
+  <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItems">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_case
+    insert into t_items
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="item != null">
+        item,
       </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="identityCard != null">
-        identity_card,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="phoneNumber != null">
-        phone_number,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-      <if test="caseNo != null">
-        case_no,
+      <if test="cost != null">
+        cost,
       </if>
       <if test="isDelete != null">
         is_delete,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="item != null">
+        #{item,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null">
-        #{identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="phoneNumber != null">
-        #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="caseNo != null">
-        #{caseNo,jdbcType=VARCHAR},
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseExample" resultType="java.lang.Long">
-    select count(*) from t_case
+  <select id="countByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItemsExample" resultType="java.lang.Long">
+    select count(*) from t_items
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_case
+    update t_items
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.item != null">
+        item = #{record.item,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identityCard != null">
-        identity_card = #{record.identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthday != null">
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.phoneNumber != null">
-        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.date != null">
-        date = #{record.date,jdbcType=DATE},
-      </if>
-      <if test="record.caseNo != null">
-        case_no = #{record.caseNo,jdbcType=VARCHAR},
+      <if test="record.cost != null">
+        cost = #{record.cost,jdbcType=DECIMAL},
       </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=INTEGER},
@@ -214,43 +162,23 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update t_case
+    update t_items
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      identity_card = #{record.identityCard,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=DATE},
-      case_no = #{record.caseNo,jdbcType=VARCHAR},
+      item = #{record.item,jdbcType=VARCHAR},
+      cost = #{record.cost,jdbcType=DECIMAL},
       is_delete = #{record.isDelete,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCase">
-    update t_case
+  <update id="updateByPrimaryKeySelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItems">
+    update t_items
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="item != null">
+        item = #{item,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null">
-        identity_card = #{identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="phoneNumber != null">
-        phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="date != null">
-        date = #{date,jdbcType=DATE},
-      </if>
-      <if test="caseNo != null">
-        case_no = #{caseNo,jdbcType=VARCHAR},
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=INTEGER},
@@ -258,15 +186,10 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCase">
-    update t_case
-    set name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      identity_card = #{identityCard,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      date = #{date,jdbcType=DATE},
-      case_no = #{caseNo,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.ricky.dentalclinic.dental.mbg.model.TItems">
+    update t_items
+    set item = #{item,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
       is_delete = #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

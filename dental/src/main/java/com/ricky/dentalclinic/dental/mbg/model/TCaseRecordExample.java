@@ -486,6 +486,76 @@ public class TCaseRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andChargeItemsIsNull() {
+            addCriterion("charge_items is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsIsNotNull() {
+            addCriterion("charge_items is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsEqualTo(String value) {
+            addCriterion("charge_items =", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsNotEqualTo(String value) {
+            addCriterion("charge_items <>", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsGreaterThan(String value) {
+            addCriterion("charge_items >", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsGreaterThanOrEqualTo(String value) {
+            addCriterion("charge_items >=", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsLessThan(String value) {
+            addCriterion("charge_items <", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsLessThanOrEqualTo(String value) {
+            addCriterion("charge_items <=", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsLike(String value) {
+            addCriterion("charge_items like", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsNotLike(String value) {
+            addCriterion("charge_items not like", value, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsIn(List<String> values) {
+            addCriterion("charge_items in", values, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsNotIn(List<String> values) {
+            addCriterion("charge_items not in", values, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsBetween(String value1, String value2) {
+            addCriterion("charge_items between", value1, value2, "chargeItems");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeItemsNotBetween(String value1, String value2) {
+            addCriterion("charge_items not between", value1, value2, "chargeItems");
+            return (Criteria) this;
+        }
+
         public Criteria andPriceIsNull() {
             addCriterion("price is null");
             return (Criteria) this;

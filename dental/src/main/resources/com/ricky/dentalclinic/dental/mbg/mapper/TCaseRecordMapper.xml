@@ -8,6 +8,7 @@
     <result column="record" jdbcType="VARCHAR" property="record" />
     <result column="case_no" jdbcType="VARCHAR" property="caseNo" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="charge_items" jdbcType="VARCHAR" property="chargeItems" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, case_id, dentist_id, record, case_no, date, price, is_delete
+    id, case_id, dentist_id, record, case_no, date, charge_items, price, is_delete
   </sql>
   <select id="selectByExample" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecordExample" resultMap="BaseResultMap">
     select
@@ -107,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_case_record (case_id, dentist_id, record, 
-      case_no, date, price, 
-      is_delete)
+      case_no, date, charge_items, 
+      price, is_delete)
     values (#{caseId,jdbcType=INTEGER}, #{dentistId,jdbcType=INTEGER}, #{record,jdbcType=VARCHAR}, 
-      #{caseNo,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, 
-      #{isDelete,jdbcType=INTEGER})
+      #{caseNo,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{chargeItems,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ricky.dentalclinic.dental.mbg.model.TCaseRecord">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -133,6 +134,9 @@
       </if>
       <if test="date != null">
         date,
+      </if>
+      <if test="chargeItems != null">
+        charge_items,
       </if>
       <if test="price != null">
         price,
@@ -156,6 +160,9 @@
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeItems != null">
+        #{chargeItems,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
@@ -192,6 +199,9 @@
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.chargeItems != null">
+        charge_items = #{record.chargeItems,jdbcType=VARCHAR},
+      </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
       </if>
@@ -211,6 +221,7 @@
       record = #{record.record,jdbcType=VARCHAR},
       case_no = #{record.caseNo,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
+      charge_items = #{record.chargeItems,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
       is_delete = #{record.isDelete,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -235,6 +246,9 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="chargeItems != null">
+        charge_items = #{chargeItems,jdbcType=VARCHAR},
+      </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
@@ -251,6 +265,7 @@
       record = #{record,jdbcType=VARCHAR},
       case_no = #{caseNo,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
+      charge_items = #{chargeItems,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       is_delete = #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
