@@ -3,6 +3,7 @@ package com.ricky.dentalclinic.dental.dao;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.domain.CaseResultWithDentist;
+import com.ricky.dentalclinic.dental.domain.DentistParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,4 +15,7 @@ public interface CaseDao {
     List<CaseResultWithDentist> listCase(@Param("queryParam") CaseQueryParam queryParam);
 
     List<CaseResultWithDentist> listCaseByDentist(@Param("dentistId") int dentistId, @Param("queryParam") CaseQueryParam queryParam);
+
+    List<DentistParam> getDentistList();
+
 }

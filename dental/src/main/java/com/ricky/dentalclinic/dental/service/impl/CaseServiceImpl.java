@@ -5,6 +5,7 @@ import com.ricky.dentalclinic.dental.dao.CaseDao;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.domain.CaseResultWithDentist;
+import com.ricky.dentalclinic.dental.domain.DentistParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.mbg.model.TCaseExample;
@@ -97,6 +98,11 @@ public class CaseServiceImpl implements CaseService {
         PageHelper.startPage(pageNum, pageSize);
         int dentistId = userService.getCurrentInfo().getId();
         return caseDao.listCaseByDentist(dentistId, queryParam);
+    }
+
+    @Override
+    public List<DentistParam> dentistList() {
+        return caseDao.getDentistList();
     }
 
     //生成病历号

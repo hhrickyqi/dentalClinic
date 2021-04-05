@@ -3,6 +3,7 @@ package com.ricky.dentalclinic.dental.service;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.domain.CaseResultWithDentist;
+import com.ricky.dentalclinic.dental.domain.DentistParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 
 import java.util.Date;
@@ -37,4 +38,9 @@ public interface CaseService {
     医师查询病人信息
      */
     List<CaseResultWithDentist> listCaseByDentist(CaseQueryParam queryParam, Integer pageSize, Integer pageNum);
+
+    /*
+    获取医师列表
+     */
+    List<DentistParam> dentistList();
 }

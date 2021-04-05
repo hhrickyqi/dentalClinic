@@ -80,4 +80,11 @@
         tc.date
         DESC
     </select>
+    <select id="getDentistList" resultType="com.ricky.dentalclinic.dental.domain.DentistParam">
+        SELECT id AS dentistId, name AS dentistName
+        FROM
+        t_user
+        WHERE
+        type = 1
+    </select>
 </mapper>

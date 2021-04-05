@@ -5,6 +5,7 @@ import com.ricky.dentalclinic.dental.api.CommonResult;
 import com.ricky.dentalclinic.dental.domain.CaseInfoParam;
 import com.ricky.dentalclinic.dental.domain.CaseQueryParam;
 import com.ricky.dentalclinic.dental.domain.CaseResultWithDentist;
+import com.ricky.dentalclinic.dental.domain.DentistParam;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseService;
 import io.swagger.annotations.Api;
@@ -37,6 +38,14 @@ public class CaseController {
             return CommonResult.success(count,"添加成功！");
         }
         return CommonResult.failed();
+    }
+
+    @ApiOperation("获取医师列表")
+    @GetMapping("/dentistList")
+    @ResponseBody
+    public CommonResult dentistList() {
+        List<DentistParam> dentistList = caseService.dentistList();
+        return CommonResult.success(dentistList);
     }
 
     @ApiOperation("验证身份证")
