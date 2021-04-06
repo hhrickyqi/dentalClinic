@@ -4,7 +4,6 @@ import com.ricky.dentalclinic.dental.api.CommonPage;
 import com.ricky.dentalclinic.dental.api.CommonResult;
 import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
-import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.service.CaseRecordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -72,20 +71,23 @@ public class CaseRecordController {
     @RequestMapping(value = "/treatmentCharge", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult treatmentCharge(@RequestParam int id,
+                                        @RequestParam String chargeItems,
                                         @RequestParam BigDecimal price) {
-        int count = caseRecordService.treatmentCharge(id, price);
+        int count = caseRecordService.treatmentCharge(id, chargeItems, price);
         if (count >= 0 ){
             return CommonResult.success(count,"收费完成！");
         }
         return CommonResult.failed();
     }
 
+
     @ApiOperation("修改费用")
     @RequestMapping(value = "/updateCharge", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateCharge(@RequestParam int id,
-                                        @RequestParam BigDecimal price) {
-        int count = caseRecordService.updateCharge(id, price);
+                                     @RequestParam String chargeItems,
+                                     @RequestParam BigDecimal price) {
+        int count = caseRecordService.updateCharge(id, chargeItems, price);
         if (count >= 0 ){
             return CommonResult.success(count,"修改费用成功！");
         }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ricky.dentalclinic.dental.dao.ItemsDao">
+    <select id="getChargeItemList" resultType="com.ricky.dentalclinic.dental.mbg.model.TItems">
+        SELECT id, item, cost, is_delete
+        FROM
+        t_items
+        WHERE
+        is_delete = 0
+    </select>
+</mapper>

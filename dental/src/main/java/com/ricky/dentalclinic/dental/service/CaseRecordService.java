@@ -2,7 +2,6 @@ package com.ricky.dentalclinic.dental.service;
 
 import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
-import com.ricky.dentalclinic.dental.mbg.model.TCase;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,10 +31,10 @@ public interface CaseRecordService {
     /*
     添加收费
      */
-    int treatmentCharge(int id, BigDecimal price);
-
+    int treatmentCharge(int id, String chargeItems, BigDecimal price);
     /*
     修改费用
      */
-    int updateCharge(int id, BigDecimal price);
+    int updateCharge(int id, String chargeItems, BigDecimal price);
+
 }

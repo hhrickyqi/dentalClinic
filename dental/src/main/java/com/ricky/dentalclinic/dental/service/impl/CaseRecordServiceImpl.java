@@ -6,7 +6,6 @@ import com.ricky.dentalclinic.dental.domain.CaseRecordParam;
 import com.ricky.dentalclinic.dental.domain.CaseRecordQueryParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseRecordMapper;
-import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.mbg.model.TCaseRecord;
 import com.ricky.dentalclinic.dental.service.CaseRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,17 +60,19 @@ public class CaseRecordServiceImpl implements CaseRecordService {
     }
 
     @Override
-    public int treatmentCharge(int id, BigDecimal price) {
+    public int treatmentCharge(int id, String chargeItems, BigDecimal price) {
         TCaseRecord caseRecord = new TCaseRecord();
         caseRecord.setId(id);
+        caseRecord.setChargeItems(chargeItems);
         caseRecord.setPrice(price);
         return caseRecordMapper.updateByPrimaryKeySelective(caseRecord);
     }
 
     @Override
-    public int updateCharge(int id, BigDecimal price) {
+    public int updateCharge(int id, String chargeItems, BigDecimal price) {
         TCaseRecord caseRecord = new TCaseRecord();
         caseRecord.setId(id);
+        caseRecord.setChargeItems(chargeItems);
         caseRecord.setPrice(price);
         return caseRecordMapper.updateByPrimaryKeySelective(caseRecord);
     }
