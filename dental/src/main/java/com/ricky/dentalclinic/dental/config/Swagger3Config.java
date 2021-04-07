@@ -66,6 +66,7 @@ public class Swagger3Config {
         result.add(getContextByPath("/case/.*"));
         result.add(getContextByPath("/caseRecord/.*"));
         result.add(getContextByPath("/items/.*"));
+        result.add(getContextByPath("/dataAnalysis/.*"));
         return result;
     }
 
