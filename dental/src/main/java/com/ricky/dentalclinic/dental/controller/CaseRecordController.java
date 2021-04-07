@@ -85,7 +85,7 @@ public class CaseRecordController {
     @RequestMapping(value = "/updateCharge", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateCharge(@RequestParam int id,
-                                     @RequestParam String chargeItems,
+                                     @RequestParam(required = false) String chargeItems,
                                      @RequestParam BigDecimal price) {
         int count = caseRecordService.updateCharge(id, chargeItems, price);
         if (count >= 0 ){
