@@ -1,12 +1,14 @@
 package com.ricky.dentalclinic.dental.service.impl;
 
 import com.ricky.dentalclinic.dental.dao.DataAnalysisDao;
+import com.ricky.dentalclinic.dental.domain.CaseAgeAnalysisResult;
 import com.ricky.dentalclinic.dental.domain.CaseDateAnalysisResult;
+import com.ricky.dentalclinic.dental.domain.TurnoverAnalysisResult;
 import com.ricky.dentalclinic.dental.service.DataAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,22 +22,29 @@ public class DataAnalysisServiceImpl implements DataAnalysisService {
     @Override
     public CaseDateAnalysisResult caseDateAnalysis(String year) {
         CaseDateAnalysisResult result = new CaseDateAnalysisResult();
-        /*Date date = null;
-        try {
-            date = sdf.parse(year);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
         result.setTotalCase(dataAnalysisDao.countTotalCase(year));//每年总接待病人数
         //统计当年每月人数
         LinkedHashMap<String, Integer> perMonthCase = new LinkedHashMap<>();
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 9; i++) {
             String month = year + "-0" + i;
             String perMonth = i + "月";
             int perMonthCount = dataAnalysisDao.countPerMonth(month);
             perMonthCase.put(perMonth, perMonthCount);
         }
+        for (int i = 10 ; i <= 12; i++) {
+            String month = year + "-" + i;
+            String perMonth = i + "月";
+            int perMonthCount = dataAnalysisDao.countPerMonth(month);
+            perMonthCase.put(perMonth, perMonthCount);
+
+        }
         result.setPerMonthCase(perMonthCase);
+        return result;
+    }
+
+    @Override
+    public CaseAgeAnalysisResult caseAgeAnalysis(String year) {
+        CaseAgeAnalysisResult result = new CaseAgeAnalysisResult();
         int old = 0;        //老年 66岁以后
         int middleAge = 0;  //中年 41-65
         int youth = 0;      //青年 18-40
@@ -61,6 +70,30 @@ public class DataAnalysisServiceImpl implements DataAnalysisService {
         result.setYouth(youth);
         result.setMiddleAge(middleAge);
         result.setOld(old);
+        return result;
+    }
+
+    @Override
+    public TurnoverAnalysisResult turnoverAnalysis(String year) {
+        TurnoverAnalysisResult result = new TurnoverAnalysisResult();
+        //获取总营业额
+        BigDecimal totalTurnover = dataAnalysisDao.getTotalTurnover(year);
+        result.setTotalTurnover(totalTurnover);
+        //每月营业额
+        LinkedHashMap<String, BigDecimal> turnover = new LinkedHashMap<>();
+        for (int i = 1; i <= 9 ; i++) {
+            String month = year + "-0" + i;
+            String perMonth = i + "月";
+            BigDecimal perMonthTurnover = dataAnalysisDao.getPerMonthTurnover(month);
+            turnover.put(perMonth, perMonthTurnover);
+        }
+        for (int i = 10; i <= 12; i++) {
+            String month = year + "-" + i;
+            String perMonth = i + "月";
+            BigDecimal perMonthTurnover = dataAnalysisDao.getPerMonthTurnover(month);
+            turnover.put(perMonth, perMonthTurnover);
+        }
+        result.setPreMonthTurnover(turnover);
         return result;
     }
 

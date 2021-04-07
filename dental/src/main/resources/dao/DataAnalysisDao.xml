@@ -31,4 +31,24 @@
             </if>
         </where>
     </select>
+    <select id="getTotalTurnover" resultType="java.math.BigDecimal">
+        SELECT SUM(price)
+        FROM
+        t_case_record
+        <where>
+            <if test="year != null and year != ''">
+                AND date LIKE concat(#{year},"%")
+            </if>
+        </where>
+    </select>
+    <select id="getPerMonthTurnover" resultType="java.math.BigDecimal">
+        SELECT SUM(price)
+        FROM
+        t_case_record
+        <where>
+            <if test="month != null and month != ''">
+                AND date LIKE concat(#{month},"%")
+            </if>
+        </where>
+    </select>
 </mapper>
