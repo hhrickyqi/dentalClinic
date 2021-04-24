@@ -28,7 +28,7 @@ public class CaseRecordController {
                                    @RequestParam int dentistId,
                                    @RequestParam String record) {
         int count = caseRecordService.insertCaseRecord(caseId, dentistId, record);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"添加成功！");
         }
         return CommonResult.failed();
@@ -39,7 +39,7 @@ public class CaseRecordController {
     @ResponseBody
     public CommonResult deleteCaseRecord(@RequestParam int id) {
         int count = caseRecordService.deleteCaseRecord(id);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"删除成功！");
         }
         return CommonResult.failed();
@@ -51,7 +51,7 @@ public class CaseRecordController {
     public CommonResult updateCase(@RequestParam int id,
                                    @RequestParam String record) {
         int count = caseRecordService.updateCaseRecord(id, record);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"修改成功！");
         }
         return CommonResult.failed();
@@ -74,7 +74,7 @@ public class CaseRecordController {
                                         @RequestParam String chargeItems,
                                         @RequestParam BigDecimal price) {
         int count = caseRecordService.treatmentCharge(id, chargeItems, price);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"收费完成！");
         }
         return CommonResult.failed();
@@ -88,7 +88,7 @@ public class CaseRecordController {
                                      @RequestParam(required = false) String chargeItems,
                                      @RequestParam BigDecimal price) {
         int count = caseRecordService.updateCharge(id, chargeItems, price);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"修改费用成功！");
         }
         return CommonResult.failed();

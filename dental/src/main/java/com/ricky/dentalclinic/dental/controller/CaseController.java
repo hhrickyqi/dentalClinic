@@ -34,7 +34,7 @@ public class CaseController {
                                    @RequestParam String identityCard,
                                    @RequestParam Integer dentistId) {
         int count = caseService.insertCase(name, sex, birthday, phoneNumber, identityCard, dentistId);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"添加成功！");
         }
         return CommonResult.failed();
@@ -64,7 +64,7 @@ public class CaseController {
     @ResponseBody
     public CommonResult deleteCase(@RequestParam int id) {
         int count = caseService.deleteCase(id);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"删除成功！");
         }
         return CommonResult.failed();
@@ -75,7 +75,7 @@ public class CaseController {
     @ResponseBody
     public CommonResult updateCase(@RequestBody CaseInfoParam caseInfo) {
         int count = caseService.updateCase(caseInfo);
-        if (count >= 0 ){
+        if (count > 0 ){
             return CommonResult.success(count,"修改成功！");
         }
         return CommonResult.failed();

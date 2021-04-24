@@ -81,7 +81,7 @@ public class UserController {
     public CommonResult easyUpdatePassword(@RequestParam int id,
                                            @RequestParam String password) {
         int count = userService.easyUpdatePassword(id, password);
-        if (count >= 0) {
+        if (count > 0) {
             return CommonResult.success(count,"密码修改成功");
         }
         return CommonResult.failed();
@@ -108,7 +108,7 @@ public class UserController {
     @ResponseBody
     public CommonResult updateInfo(@RequestBody UserInfoParam userInfo) {
         int count = userService.updateInfo(userInfo);
-        if (count >= 0) {
+        if (count > 0) {
             return CommonResult.success(count,"修改成功");
         }
         return CommonResult.failed();
@@ -140,7 +140,7 @@ public class UserController {
     @ResponseBody
     public CommonResult deleteUser(@RequestParam int id) {
         int count = userService.deleteUser(id);
-        if (count >= 0) {
+        if (count > 0) {
             return CommonResult.success(count,"删除成功");
         }
         return CommonResult.failed();
@@ -152,7 +152,7 @@ public class UserController {
     public CommonResult modifyUserPermissions(@RequestParam int id,
                                               @RequestParam int type) {
         int count = userService.modifyUserPermissions(id, type);
-        if (count >= 0) {
+        if (count > 0) {
             return CommonResult.success(count,"修改成功");
         }
         return CommonResult.failed();
