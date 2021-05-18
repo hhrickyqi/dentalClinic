@@ -9,6 +9,7 @@ import com.ricky.dentalclinic.dental.domain.DentistParam;
 import com.ricky.dentalclinic.dental.mbg.mapper.TCaseMapper;
 import com.ricky.dentalclinic.dental.mbg.model.TCase;
 import com.ricky.dentalclinic.dental.mbg.model.TCaseExample;
+import com.ricky.dentalclinic.dental.mbg.model.TUser;
 import com.ricky.dentalclinic.dental.service.CaseService;
 import com.ricky.dentalclinic.dental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,10 @@ public class CaseServiceImpl implements CaseService {
     @Override
     public List<CaseResultWithDentist> listCase(CaseQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
+        TUser user = userService.getCurrentInfo();
+        if (user.getType() == 1) {
+            return caseDao.listCaseByDentist(user.getId(), queryParam);
+        }
         return caseDao.listCase(queryParam);
     }
 
